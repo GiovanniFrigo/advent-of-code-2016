@@ -1,7 +1,7 @@
 # What I learned
-## by trial and error
+### by trial and error
 
-### Day 1 🎄
+## Day 1 🎄
 - `Array.indexOf()` will search inside the array using _strict equality_ (the same method used by the === or triple-equals operator). [RTFM! 📖](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf).
 - This means that **using indexOf to find an array in an array of arrays will not work**:
 ```js
@@ -9,11 +9,11 @@ var visited=[[0,0]];
 visited.indexOf([0,0]); // -1
 ```
 This is because `[0,0] === [0,0]` is `false`.
-- You can use _find_, _findIndex_ or _some_ instead `visited.findIndex(e => e[0]==y && e[1]==y)`.
+- You can use _find_, _findIndex_ or _some_ instead `visited.findIndex(e => e[0]==x && e[1]==y)`.
 
-### Day 7 ✨
+## Day 7 ✨
 
-#### Part 1
+### Part 1
 Today was really challenging. Aside from splitting the string in the parts inside and outside the square brackets (regex: `/([a-z]{4,})(\[[a-z]{4,}\])*/g`, running until no more matches were found), I used a regex to detect the possible ABBA sequences.
 
 My first attempt was to simply look for 2 characters, repeating themselves in reverse order for a total length of 4: 
@@ -30,7 +30,7 @@ Note that the negative lookahead group is not captured itself, so groups index a
 
 
 ---
-#### Part 2
+### Part 2
 
 For part 2 things got a bit more complicated as I challenged myself to solve it with only one regex:
 
@@ -50,3 +50,14 @@ Whoa. This huge regex can be split in little parts:
   - We allow for unmatching square brackets groups and outside strings: `(?:\w*\[\w*\])*`
   
 That was easy, wasn't it? 😅
+
+## Day 13 🐑
+Today puzzle was pretty nice, a labyrinth exploration problem. I implemented it using an [A* search algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).  Pretty simple once you get the handle of it.
+
+Anyway, I hate that in JS there isn't a good way to have _searchable_ sets of arrays or objects without implementing them yourself. The problem is the the same as seen in [Day 1](#day1), arrays and objects are never `strictly equal`.
+
+ - In part 1, I used native JS `Sets`, but every time I had to insert a value in the set I would have to convert it to string (`openSet.add(start.toString());`). Same goes for items lookup (`closedSet.has(neighbor.toString())`). This also means that to extract an element from a set I would have to convert it back into an array of integers `setElement.split(',').map(i => parseInt(i))`. _UGH._
+
+ - In part 2 I used an array based implementation, so I considered a set to be an array of arrays. Here insertion is better (just use `openSet.push(start);`), but removing an element requires filtering the whole array to exclude the searched element(`openSet = openSet.filter(c => c.toString() !== current.toString());`), not to mention item lookup (`closedSet.findIndex(e => e.toString() == neighbor.toString()) > -1`).  _OUCH!_
+ 
+ Is there any better solution to this problem I'm not aware of yet?
