@@ -60,4 +60,10 @@ Anyway, I hate that in JS there isn't a good way to have _searchable_ sets of ar
 
  - In part 2 I used an array based implementation, so I considered a set to be an array of arrays. Here insertion is better (just use `openSet.push(start);`), but removing an element requires filtering the whole array to exclude the searched element(`openSet = openSet.filter(c => c.toString() !== current.toString());`), not to mention item lookup (`closedSet.findIndex(e => e.toString() == neighbor.toString()) > -1`).  _OUCH!_
  
- Is there any better solution to this problem I'm not aware of yet?
+> Is there any better solution to this problem I'm not aware of yet?
+ 
+## Day 11 🎍
+Finally got time to properly look into the problem. After some hours of failure, debugging, Wikipedia searches I made it! (And I didn't read [this guide](https://andars.github.io/aoc_day11.html). Nope. I didn't. ~~I may have~~)
+
+TL;DR: basically just a BFS on a graph representing the whole state of the 4 floors and the elevator position.  
+Spent quite a lot of time writing the function that from one state calculates all the possible steps, mostly coding the rules given in the description. More details on the tutorial I didn't read :)
