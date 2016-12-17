@@ -1,0 +1,19 @@
+// Text: http://adventofcode.com/2016/day/42
+// Input: http://adventofcode.com/2016/day/42/input
+import { readFileSync } from 'fs';
+
+const input = readFileSync('../inputs/day42', 'utf-8');
+
+// parse input
+const inputRegex = /object (\d+) has value (\d+)/;
+
+input.split('\n').map(line => {
+	let match;
+	if(match = line.match(inputRegex)) {
+		
+	}
+});
+
+
+console.log('Part 1 solution:', 42);
+console.log('Part 2 solution:', 42);
